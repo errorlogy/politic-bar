@@ -16,6 +16,7 @@ Do not duplicate the full errorlogy ontology or MAS engine here. Integrate via d
 | Error card protocol (v0.6 sketch) | `METHODOLOGY.md`, `ARCHITECTURE.md` |
 | Legacy L1–L5 taxonomy slice | `taxonomy/*.json` |
 | Active unified ontology v16 | [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) → `errorlogy-mas/data/errorlogy_unified_taxonomy_v16.json` |
+| Institutional topology + contracts | [errorlogy/ai-native-gov](https://github.com/errorlogy/ai-native-gov) → `docs/integrations/POLITIC_BAR.md` |
 | MAS analytics engine | [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) → `errorlogy-mas/mas/engine/` |
 | Full product TZ (historical) | errorlogy repo → `ERRORLOGY/errorlogy_old_version/Cursor_Project/TZ_Cursor_Errorlogy_politicbar_FULL.md` |
 | NAMM certificates / experiments | [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) |
@@ -65,7 +66,7 @@ When extending politic.bar, prefer wiring to errorlogy-mas engine for μ/α/PNO/
 - Commit API keys, `.env`, or credential files
 - Copy `errorlogy_unified_taxonomy_v16.json` into this repo (use dependency link)
 - Treat fuzzy scores or weak signals as legal verdicts
-- Auto-merge v0.6 taxonomy IDs with v16 without an explicit mapping pass (see errorlogy Obsidian note: «Не мержить автоматически»)
+- Auto-merge v0.6 taxonomy IDs with v16 without an explicit mapping pass (see errorlogy Obsidian note: "Do not auto-merge")
 
 ## Suggested work order (greenfield → MVP)
 

@@ -1,0 +1,29 @@
+name: CI
+
+on:
+  push:
+    branches: [main, master]
+  pull_request:
+    branches: [main, master]
+
+jobs:
+  python:
+    name: politic-bar
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+          cache-dependency-path: requirements.txt
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Import smoke test
+        run: python -c "import politic_bar; from politic_bar import catalog, pipeline, models"
+
+      - name: Catalog load smoke test
+        run: python -c "from politic_bar.catalog import load_catalog; c=load_catalog(); assert len(c) >= 5"

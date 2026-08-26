@@ -1,66 +1,84 @@
 # politic.bar
 
-**Платформа, где политические бренды становятся politifi-активами** — с двумя сторонами модели: движком прогнозов/ошибок Errorlogy и потоками сигнал/шум вокруг событий.
+[![CC BY 4.0][cc-by-shield]][cc-by]
+
+[cc-by]: https://creativecommons.org/licenses/by/4.0/
+[cc-by-shield]: https://img.shields.io/badge/License-CC%20BY%204.0-lightgrey.svg
 
 **A platform where political brands become politifi assets** — modeled on two sides: the Errorlogy forecasting/error engine and info signal/noise streams around live events.
 
 - **Site:** [errorlogy.com](https://errorlogy.com)
-- **Engine / ontology:** [github.com/errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) (`errorlogy-mas`, unified taxonomy v16)
-- **Math discovery layer:** [github.com/errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) (NAMM)
+- **Engine / ontology:** [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) (`errorlogy-mas`, unified taxonomy v16)
+- **Institutional topology:** [errorlogy/ai-native-gov](https://github.com/errorlogy/ai-native-gov)
+- **Math discovery layer:** [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) (NAMM)
+
+Documentation and analytical artifacts are licensed under **[CC BY 4.0](LICENSE)** · Copyright © 2026 [Errorlogy](https://errorlogy.com)
 
 ---
 
-## Что это / What this is
+## What this is
 
-**politic.bar** — первый прикладной продукт **errorlogy**: каталог governance decision-events, где каждая запись — **error card** (карточка ошибки), а не обвинение. Запись фиксирует разрыв между *claimed / known / decided*, классифицирует его по таксономии сбоев (L1–L5 в v0.6-скетче; v16+ в active engine), проходит adversarial review и neutrality audit.
+**politic.bar** is the first applied product of **errorlogy**: a catalog of governance decision-events where each entry is an **error card**, not an accusation. A card records the gap between *claimed / known / decided*, classifies it against a failure-mode taxonomy (L1–L5 in the v0.6 sketch; v16+ in the active engine), and passes adversarial review and neutrality audit.
 
-**politifi** — слой активов поверх брендов, событий и карточек: именованные политические сущности (лидеры, коалиции, институции, повестки), привязанные к потокам новостей, прогнозам и error-topology в каталоге.
+**politifi** is the asset layer over brands, events, and cards: named political entities (leaders, coalitions, institutions, agenda items) linked to news streams, forecasts, and error topology in the catalog.
 
 ---
 
-## Две стороны модели / Two-sided model
+## Two-sided model
 
-| Сторона | Роль | Репозиторий |
-|--------|------|-------------|
+| Side | Role | Repository |
+|------|------|------------|
 | **Errorlogy engine** | μ-scoring, α-propagation, PNO/FPD/CAT, fuzzy forecasts, governance failure modeling | [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) |
-| **Signal / noise streams** | Контекстные ленты вокруг story/event: что произошло, что заявлено, что согласовано, каскад решений | **этот репозиторий** (+ будущие ingest-сервисы) |
+| **Signal / noise streams** | Contextual feeds around a story/event: what happened, what was claimed, what was agreed, decision cascade | **this repo** (+ future ingest services) |
 
-Пример: встреча **Trump ↔ Macron** на текущей повестке → каскад решений, соглашений, заявлений, медиа-шума → error cards + politifi-профили акторов + прогнозы engine.
+Example: a **Trump ↔ Macron** summit on the current agenda → cascade of decisions, agreements, statements, media noise → error cards + politifi actor profiles + engine forecasts.
 
-См. [`docs/example-trump-macron-cascade.md`](docs/example-trump-macron-cascade.md).
+See [`docs/example-trump-macron-cascade.md`](docs/example-trump-macron-cascade.md).
+
+Institutional framing for live events: [ai-native-gov integration doc](https://github.com/errorlogy/ai-native-gov/blob/main/docs/integrations/POLITIC_BAR.md).
 
 ---
 
-## Состояние репозитория / Repository status
+## Repository status
 
-| Путь | Статус |
+| Path | Status |
 |------|--------|
-| `METHODOLOGY.md`, `ARCHITECTURE.md` | v0.6 OLD SKETCH — протокол и 8-agent pipeline |
-| `politic_bar/` | Референсная реализация pipeline (Python + Anthropic API) |
-| `cases/` | 5 seed-кейсов + Challenger v0.6 pipeline run |
+| `METHODOLOGY.md`, `ARCHITECTURE.md` | v0.6 OLD SKETCH — protocol and 8-agent pipeline |
+| `politic_bar/` | Reference pipeline implementation (Python + Anthropic API) |
+| `cases/` | 5 seed cases + Challenger v0.6 pipeline run |
 | `taxonomy/` | L1–L5 JSON (189 CB + 14 SF + 14 MP) — **legacy slice**; active ontology → errorlogy v16 |
-| `dashboard.html` | Статический просмотр каталога |
-| `docs/` | Архитектура vNext, интеграции, сценарии |
+| `dashboard.html` | Static catalog viewer |
+| `docs/` | vNext architecture, integrations, scenarios |
 
-**Не дублируем** unified taxonomy v16 и MAS engine — только ссылаемся на [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy).
+**We do not duplicate** unified taxonomy v16 or the MAS engine — only link to [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy).
 
 ---
 
-## Быстрый старт / Quick start
+## Quick start
 
 ```powershell
-cd C:\Users\Public\POLITIC_BAR
+git clone https://github.com/errorlogy/politic-bar.git
+cd politic-bar
 python -m pip install -r requirements.txt
-$env:ANTHROPIC_API_KEY = "sk-..."   # только для новых прогонов pipeline
+$env:ANTHROPIC_API_KEY = "sk-..."   # required only for new pipeline runs
 
-# Просмотр seed-каталога (без API)
+# View seed catalog (no API)
 start dashboard.html
 
-# Новый кейс из source bundle
+# New case from source bundle
 python run.py MY-CASE-ID path\to\source_bundle.txt
 ```
 
-Seed-кейсы уже в `cases/` — pipeline не обязателен для ознакомления.
+Seed cases are already in `cases/` — the pipeline is optional for exploration.
+
+Side-by-side with errorlogy-mas:
+
+```powershell
+git clone https://github.com/errorlogy/errorlogy.git
+cd errorlogy\errorlogy-mas
+python -m pip install -e ".[dev]"
+python examples/run_challenger.py --engine-only
+```
 
 ---
 
@@ -77,28 +95,37 @@ Seed-кейсы уже в `cases/` — pipeline не обязателен для
 
 ---
 
-## Документация / Docs
+## Documentation
 
-- [`METHODOLOGY.md`](METHODOLOGY.md) — протокол error card (v0.6)
+- [`METHODOLOGY.md`](METHODOLOGY.md) — error card protocol (v0.6)
 - [`ARCHITECTURE.md`](ARCHITECTURE.md) — 8-agent pipeline
 - [`docs/architecture.md`](docs/architecture.md) — politifi + signal/noise + vNext contours
-- [`docs/integration-errorlogy.md`](docs/integration-errorlogy.md) — связь с errorlogy-mas
-- [`docs/integration-namm.md`](docs/integration-namm.md) — связь с NAMM
-- [`docs/example-trump-macron-cascade.md`](docs/example-trump-macron-cascade.md) — сценарий каскада
-- [`AGENTS.md`](AGENTS.md) — инструкции для AI-разработки
+- [`docs/integration-errorlogy.md`](docs/integration-errorlogy.md) — errorlogy-mas integration
+- [`docs/integration-namm.md`](docs/integration-namm.md) — NAMM integration
+- [`docs/example-trump-macron-cascade.md`](docs/example-trump-macron-cascade.md) — cascade scenario
+- [`AGENTS.md`](AGENTS.md) — AI agent instructions
+- [ai-native-gov POLITIC_BAR integration](https://github.com/errorlogy/ai-native-gov/blob/main/docs/integrations/POLITIC_BAR.md)
 
 ---
 
-## Языковые ограничения / Language rules
+## Language rules
 
-Используем: *analytical contribution*, *fuzzy membership*, *early-warning hypothesis*, *capacity mismatch*.
+Use: *analytical contribution*, *fuzzy membership*, *early-warning hypothesis*, *capacity mismatch*.
 
-Не используем: *guilty*, *criminal*, *proven guilt*, *corrupt* (без legal evidence layer).
+Do not use: *guilty*, *criminal*, *proven guilt*, *corrupt* (without a legal evidence layer).
 
-Подробнее: `METHODOLOGY.md` §4, [`AGENTS.md`](AGENTS.md).
+See `METHODOLOGY.md` §4 and [`AGENTS.md`](AGENTS.md).
 
 ---
 
-## Лицензия / License
+## Security
 
-Private research repository under [errorlogy](https://github.com/errorlogy) org. Methodology and cards are analytical artifacts, not legal findings.
+See [`SECURITY.md`](SECURITY.md). Never commit API keys or `.env` files.
+
+---
+
+## License
+
+Documentation, methodology, seed cards, and source in this repository are licensed under **[Creative Commons Attribution 4.0 International (CC BY 4.0)](LICENSE)**.
+
+Analytical artifacts are not legal findings.

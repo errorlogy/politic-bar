@@ -10,6 +10,7 @@
 |---------|------|------|
 | **NAMM** | [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments) | Protocol v2, experiments, `certificate.json` witnesses |
 | **Errorlogy** | [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) | Governance ontology + MAS engine |
+| **AI Native Gov** | [errorlogy/ai-native-gov](https://github.com/errorlogy/ai-native-gov) | Institutional topology + cross-layer contracts |
 | **politic.bar** | this repo | Politifi assets, error cards, signal/noise streams |
 
 Sibling lineage under Anthemium: see NAMM [`docs/ANTHEMIUM_NAMM_SYNERGY.md`](https://github.com/errorlogy/namm-experiments/blob/main/docs/ANTHEMIUM_NAMM_SYNERGY.md).

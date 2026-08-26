@@ -9,6 +9,7 @@ politic.bar is the **first public product** of errorlogy. This repo holds the v0
 | Repo | Role |
 |------|------|
 | [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy) | Unified taxonomy v16, errorlogy-mas engine, retrospective seed corpus, full TZ |
+| [errorlogy/ai-native-gov](https://github.com/errorlogy/ai-native-gov) | Institutional topology, cross-layer schemas, integration contracts |
 | **errorlogy/politic-bar** (this repo) | Error card protocol sketch, seed catalog, politifi + streams architecture |
 
 ---
@@ -78,7 +79,7 @@ Two representations of one idea (from errorlogy Obsidian):
 | Pipeline | `politic_bar/pipeline.py` | AGIU / TaxonomyLoader |
 | Layers | L1–L5 | L1–CAT, METHODS, MAX_UNIVERSE |
 
-**Не мержить автоматически.** CB/SF/MP IDs should match in the atomic subset; v16 layers require engine support before Classifier upgrade.
+**Do not auto-merge.** CB/SF/MP IDs should match in the atomic subset; v16 layers require engine support before Classifier upgrade.
 
 ---
 
@@ -114,3 +115,4 @@ Both repos enforce neutrality. See `METHODOLOGY.md` §4 and errorlogy-mas `AGENT
 
 - [errorlogy.com](https://errorlogy.com)
 - [github.com/errorlogy/errorlogy](https://github.com/errorlogy/errorlogy)
+- [github.com/errorlogy/ai-native-gov](https://github.com/errorlogy/ai-native-gov)

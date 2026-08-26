@@ -141,6 +141,7 @@ politic-bar/
 
 - [errorlogy.com](https://errorlogy.com)
 - [errorlogy/errorlogy](https://github.com/errorlogy/errorlogy)
+- [errorlogy/ai-native-gov](https://github.com/errorlogy/ai-native-gov) — institutional topology + integration contracts
 - [errorlogy/namm-experiments](https://github.com/errorlogy/namm-experiments)
 - [`integration-errorlogy.md`](integration-errorlogy.md)
 - [`integration-namm.md`](integration-namm.md)

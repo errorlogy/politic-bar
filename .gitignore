@@ -1,0 +1,28 @@
+# Secrets — never commit
+.env
+.env.*
+*api_key*
+*secret*
+*credentials*
+anthropic_api_key.txt
+
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.venv/
+venv/
+.pytest_cache/
+.mypy_cache/
+
+# IDE / local agent config
+.claude/
+.vscode/
+.idea/
+
+# OS
+Thumbs.db
+Desktop.ini
+
+# Large duplicate taxonomy snapshots (use errorlogy repo v16)
+errorlogy_unified_taxonomy*.json

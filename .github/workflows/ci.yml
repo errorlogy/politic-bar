@@ -23,7 +23,10 @@ jobs:
         run: pip install -r requirements.txt
 
       - name: Import smoke test
-        run: python -c "import politic_bar; from politic_bar import catalog, pipeline, models"
+        run: python -c "import politic_bar; from politic_bar import catalog, pipeline, models, signal_envelope, half_life_indexer"
+
+      - name: Half-life indexer tests
+        run: pytest tests/test_half_life_indexer.py -q
 
       - name: Catalog load smoke test
         run: python -c "from politic_bar.catalog import load_catalog; c=load_catalog(); assert len(c) >= 5"

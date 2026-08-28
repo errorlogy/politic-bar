@@ -56,8 +56,7 @@ def emit_signal_noise_half_life_update(
 ) -> dict:
     """Cross-layer emit shape for signal_noise_half_life_update."""
     indexed = index_half_life(envelope)
-    metrics = indexed.memetic_metrics
-    return {
+    event: dict = {
         "story_id": indexed.story_id,
         "event_type": "signal_noise_half_life_update",
         "epistemic_label": epistemic_label,
@@ -67,10 +66,21 @@ def emit_signal_noise_half_life_update(
             "institution:national-instance",
         ],
         "stream_refs": [indexed.stream_item_id],
-        "half_life": {
-            "stream_item_id": indexed.stream_item_id,
-            "decay_tau_hours": metrics.decay_tau_hours if metrics else None,
-            "peak_velocity": metrics.peak_velocity if metrics else None,
-            "first_seen": metrics.first_seen.isoformat() if metrics and metrics.first_seen else None,
-        },
+        "half_life": _half_life_payload(indexed),
     }
+    if indexed.testament_clause_ref:
+        event["testament_clause_ref"] = indexed.testament_clause_ref
+    return event
+
+
+def _half_life_payload(envelope: SignalEnvelope) -> dict:
+    metrics = envelope.memetic_metrics
+    payload = {
+        "stream_item_id": envelope.stream_item_id,
+        "decay_tau_hours": metrics.decay_tau_hours if metrics else None,
+        "peak_velocity": metrics.peak_velocity if metrics else None,
+        "first_seen": metrics.first_seen.isoformat() if metrics and metrics.first_seen else None,
+    }
+    if envelope.testament_clause_ref:
+        payload["testament_clause_ref"] = envelope.testament_clause_ref
+    return payload

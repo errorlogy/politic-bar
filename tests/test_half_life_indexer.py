@@ -50,3 +50,42 @@ def test_emit_half_life_update_shape():
     assert event["story_id"] == "story-2"
     assert event["epistemic_label"] == "OPERATIONAL"
     assert event["half_life"]["decay_tau_hours"] is not None
+
+
+def test_signal_envelope_testament_clause_ref():
+    env = SignalEnvelope(
+        stream_item_id="si-3",
+        story_id="fork-variant-a",
+        source_type="social",
+        evidence_grade="weak",
+        testament_clause_ref="POSLEDNIY_ZAVET:IV",
+    )
+    assert env.testament_clause_ref == "POSLEDNIY_ZAVET:IV"
+
+
+def test_emit_half_life_includes_clause_metadata():
+    first = datetime.now(timezone.utc)
+    env = SignalEnvelope(
+        stream_item_id="si-4",
+        story_id="fork-variant-a",
+        source_type="social",
+        evidence_grade="weak",
+        testament_clause_ref="POSLEDNIY_ZAVET:IV",
+        memetic_metrics=MemeticMetrics(first_seen=first, peak_velocity=25.0),
+    )
+    event = emit_signal_noise_half_life_update(env)
+    assert event["testament_clause_ref"] == "POSLEDNIY_ZAVET:IV"
+    assert event["half_life"]["testament_clause_ref"] == "POSLEDNIY_ZAVET:IV"
+
+
+def test_signal_envelope_rejects_invalid_clause():
+    import pytest
+
+    with pytest.raises(ValueError, match="testament_clause_ref"):
+        SignalEnvelope(
+            stream_item_id="si-bad",
+            story_id="story-bad",
+            source_type="social",
+            evidence_grade="weak",
+            testament_clause_ref="POSLEDNIY_ZAVET:XI",
+        )

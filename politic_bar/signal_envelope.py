@@ -5,10 +5,11 @@ Epistemic label: OPERATIONAL for adapter-derived stream items.
 
 from __future__ import annotations
 
+import re
 from datetime import datetime
 from typing import Literal
 
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, field_validator
 
 EvidenceGrade = Literal["weak", "medium", "strong"]
 SourceType = Literal["primary", "commentary", "speculation", "social"]
@@ -18,6 +19,10 @@ EpistemicLabel = Literal[
     "COMPUTATIONAL_EVIDENCE",
     "PHILOSOPHICAL_INFERENCE",
 ]
+
+_TESTAMENT_CLAUSE_PATTERN = re.compile(
+    r"^POSLEDNIY_ZAVET:(I|II|III|IV|V|VI|VII|VIII|IX|X)$"
+)
 
 
 class MemeticMetrics(BaseModel):
@@ -43,3 +48,16 @@ class SignalEnvelope(BaseModel):
     memetic_metrics: MemeticMetrics | None = None
     stream_refs: list[str] | None = None
     jurisdiction_set: list[str] | None = None
+    testament_clause_ref: str | None = None
+
+    @field_validator("testament_clause_ref")
+    @classmethod
+    def validate_testament_clause_ref(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        text = value.strip()
+        if not _TESTAMENT_CLAUSE_PATTERN.match(text):
+            raise ValueError(
+                "testament_clause_ref must match POSLEDNIY_ZAVET:(I|II|...|X)"
+            )
+        return text

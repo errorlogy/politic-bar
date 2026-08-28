@@ -48,7 +48,10 @@ class SignalEnvelope(BaseModel):
     memetic_metrics: MemeticMetrics | None = None
     stream_refs: list[str] | None = None
     jurisdiction_set: list[str] | None = None
-    testament_clause_ref: str | None = None
+    testament_clause_ref: str | None = Field(
+        None,
+        description="Optional POSLEDNIY_ZAVET clause sidecar (POSLEDNIY_ZAVET:I..:X)",
+    )
 
     @field_validator("testament_clause_ref")
     @classmethod

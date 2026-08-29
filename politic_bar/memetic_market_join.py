@@ -28,4 +28,6 @@ def memetic_metrics_for_join(envelope: SignalEnvelope) -> dict:
         sidecar["platform_contour"] = metrics.platform_contour
     if indexed.testament_clause_ref:
         sidecar["testament_clause_ref"] = indexed.testament_clause_ref
+    if indexed.persona_cohort_id:
+        sidecar["persona_cohort_id"] = indexed.persona_cohort_id
     return {k: v for k, v in sidecar.items() if v is not None}

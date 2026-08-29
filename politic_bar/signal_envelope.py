@@ -23,6 +23,7 @@ EpistemicLabel = Literal[
 _TESTAMENT_CLAUSE_PATTERN = re.compile(
     r"^POSLEDNIY_ZAVET:(I|II|III|IV|V|VI|VII|VIII|IX|X)$"
 )
+_PERSONA_COHORT_SLUG_PATTERN = re.compile(r"^[a-z][a-z0-9_-]{2,63}$")
 
 
 class MemeticMetrics(BaseModel):
@@ -52,6 +53,10 @@ class SignalEnvelope(BaseModel):
         None,
         description="Optional POSLEDNIY_ZAVET clause sidecar (POSLEDNIY_ZAVET:I..:X)",
     )
+    persona_cohort_id: str | None = Field(
+        None,
+        description="Optional MatrAIx persona cohort slug (sidecar only — INSTITUTIONAL_MODEL)",
+    )
 
     @field_validator("testament_clause_ref")
     @classmethod
@@ -62,5 +67,18 @@ class SignalEnvelope(BaseModel):
         if not _TESTAMENT_CLAUSE_PATTERN.match(text):
             raise ValueError(
                 "testament_clause_ref must match POSLEDNIY_ZAVET:(I|II|...|X)"
+            )
+        return text
+
+    @field_validator("persona_cohort_id")
+    @classmethod
+    def validate_persona_cohort_id(cls, value: str | None) -> str | None:
+        if value is None:
+            return None
+        text = value.strip()
+        if not _PERSONA_COHORT_SLUG_PATTERN.match(text):
+            raise ValueError(
+                "persona_cohort_id must be a lowercase slug "
+                "(3-64 chars, start with a-z, then [a-z0-9_-])"
             )
         return text
